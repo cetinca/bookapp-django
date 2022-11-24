@@ -28,7 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='this is an awesome secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.environ.get('DEBUG', default=False) == 'True' else False
+RENDER = True if os.environ.get('RENDER', default='false') == 'true' else False
+DEBUG = False if RENDER else True
 
 ALLOWED_HOSTS = []
 
@@ -82,7 +83,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'book_app.wsgi.application'
 
 # Database
-if DEBUG:
+if not RENDER:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -123,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-if DEBUG:
+if not RENDER:
     STATIC_URL = "static/"
 else:
     # Tell Django to copy statics to the `staticfiles` directory
