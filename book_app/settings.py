@@ -82,15 +82,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'book_app.wsgi.application'
 
 # Database
-
-
-if True if DEBUG == "True" else False:
-    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-else:
-    DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600)
 }
 
 AUTH_PASSWORD_VALIDATORS = [
