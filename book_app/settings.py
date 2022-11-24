@@ -83,17 +83,14 @@ WSGI_APPLICATION = 'book_app.wsgi.application'
 
 # Database
 
+
 if True if DEBUG == "True" else False:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 else:
-    DATABASES = {
-        'default': dj_database_url.config()
-    }
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
