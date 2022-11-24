@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='this is an awesome secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-RENDER = True if os.environ.get('RENDER', default='false') == 'true' else False
+RENDER = os.environ.get('RENDER')
 DEBUG = False if RENDER else True
 
 ALLOWED_HOSTS = []
@@ -124,6 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# media files
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
 if not RENDER:
     STATIC_URL = "static/"
 else:
@@ -135,9 +139,6 @@ else:
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
