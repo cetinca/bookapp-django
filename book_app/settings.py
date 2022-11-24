@@ -127,6 +127,7 @@ USE_TZ = True
 if not RENDER:
     STATIC_URL = "static/"
 else:
+    STATIC_URL = "/static/"
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
