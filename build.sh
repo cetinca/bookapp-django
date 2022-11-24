@@ -14,4 +14,5 @@ then
   cat .env | xargs export
 fi
 
-python manage.py createsuperuser --no-input
+python manage.py createsuperuser --username $DJANGO_SUPERUSER_USERNAME \
+--password $DJANGO_SUPERUSER_PASSWORD   --email 'cetinca@example.com' --noinput
